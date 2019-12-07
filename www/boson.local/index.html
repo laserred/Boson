@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome to Boson!</title>
+        <style>
+            div {
+                position: absolute;
+                top: 50%;
+                right: 0;
+                left: 0;
+                transform: translateY(-50%);
+                margin: 0 auto;
+                width: 600px;
+                max-width: 70%;
+                padding: 30px;
+                border-radius: 10px;
+                background-color: #363636;
+                font-family: Tahoma, Verdana, Arial, sans-serif;
+                color: #fff;
+            }
+            .laser-red {
+                position: absolute;
+                right: 30px;
+                bottom: 30px;
+                width: 118px;
+                height: 20px;
+                background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMTMuNCAxNy45Ij48cGF0aCBkPSJNMjYuNiAzLjFoMnY5LjdIMzN2MmgtNi4zVjMuMXptMTYuMSAxMS43SDQ1TDM5LjcgMi43bC01LjMgMTIuMWgyLjJsMy4xLTcuM3ptNC44LS42Yy0uNy0uNS0xLjEtMS4xLTEuNC0xLjlsMS44LS44Yy4xLjUuNC44LjcgMS4xcy43LjQgMS4yLjQuOS0uMiAxLjItLjUuNS0uNy41LTEuMmMwLS4zLS4xLS42LS4yLS44LS4yLS4yLS40LS40LS42LS41LS4zLS4xLS43LS4zLTEuMy0uNi0xLS40LTEuNy0uOC0yLjItMS40cy0uNy0xLjItLjctMmMwLS42LjEtMS4xLjQtMS42cy43LS44IDEuMi0xLjEgMS0uNCAxLjYtLjRjLjcgMCAxLjQuMiAyIC42czEgLjkgMS4yIDEuNmwtMS44LjljLS4xLS4zLS4yLS42LS41LS44LS4yLS4yLS41LS4zLS45LS4zcy0uNy4xLS45LjMtLjQuNS0uNC44YzAgLjQuMS43LjMuOXMuNi40IDEuMy43Yy4xIDAgLjEuMS4yLjFzLjEgMCAuMS4xYy43LjIgMS4yLjQgMS43LjcuNC4yLjguNiAxLjEgMS4xcy41IDEuMS41IDEuOC0uMiAxLjMtLjUgMS44LS44IDEtMS4zIDEuM2MtLjYuMy0xLjIuNS0xLjkuNS0uOS0uMS0xLjctLjMtMi40LS44em0yNS40LjZsLTIuNC00LjNoLTEuN3Y0LjNoLTJWMy4xaDQuM2MuNyAwIDEuMy4yIDEuOC41LjYuMyAxIC44IDEuMyAxLjMuMy42LjUgMS4yLjUgMS44IDAgLjgtLjIgMS41LS42IDIuMXMtMSAxLjEtMS43IDEuM2wyLjcgNC42aC0yLjJ6bS00LjItNi4zaDIuNGMuNSAwIC45LS4yIDEuMi0uNXMuNS0uNy41LTEuMi0uMi0uOS0uNS0xLjItLjctLjUtMS4yLS41aC0yLjR2My40em0yMC40IDYuM2wtMi40LTQuM0g4NXY0LjNoLTJWMy4xaDQuM2MuNyAwIDEuMy4yIDEuOC41LjYuMyAxIC44IDEuMyAxLjMuNC42LjYgMS4yLjYgMS45IDAgLjgtLjIgMS41LS42IDIuMXMtMSAxLjEtMS43IDEuM2wyLjcgNC42aC0yLjN6TTg1IDguNWgyLjRjLjUgMCAuOS0uMiAxLjItLjVzLjQtLjcuNC0xLjItLjItLjktLjUtMS4yLS43LS41LTEuMi0uNUg4NXYzLjR6TTU2LjQgMy4xaDcuM3YyaC01LjNWOGg0LjFsLS44IDJoLTMuM3YyLjloNS4zdjJoLTcuM1YzLjF6bTM3LjQgMGg3LjN2MmgtNS4zVjhoNC4xbC0uOCAyaC0zLjN2Mi45aDUuM3YyaC03LjNWMy4xem0xMC40IDBoMy40YzEuMSAwIDIgLjMgMi45LjhzMS42IDEuMiAyLjEgMi4xLjggMS45LjggMi45YzAgMS4xLS4zIDItLjggMi45cy0xLjIgMS42LTIuMSAyLjEtMS45LjgtMi45LjhoLTMuNFYzLjF6bTMuNCA5LjdjLjcgMCAxLjQtLjIgMS45LS41LjYtLjMgMS4xLS44IDEuNC0xLjRzLjUtMS4yLjUtMS45LS4yLTEuNC0uNS0xLjljLS4zLS42LS44LTEuMS0xLjQtMS40cy0xLjItLjUtMS45LS41aC0xLjR2Ny43aDEuNHpNOC45IDBMMCAxNy45aDcuNWwtMS4xLTIuMmgtM2w1LjUtMTEgMS41IDIuOS0yLjYgNS4yIDIuNSA1LjFoMi40bC0yLjYtNS4xIDIuNi01LjJ6bTUuMyAxMC40TDEzIDEyLjhsMi41IDUuMWgyLjR6IiBmaWxsPSIjZmZmIi8+PC9zdmc+) no-repeat 50%;
+                text-indent: -9999px;
+                opacity: .65;
+                transition: opacity .1s ease;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h1>Welcome to Boson!</h1>
+            <p>If you see this page, the server is successfully installed and
+            working. Further configuration is required.</p>
+            <p>The machine is currently using the default hostname. Instead, try starting your box with: <pre>vagrant --hostname=[hostname] up</pre></p>
+            <p>See the README for more information.</p>            
+            <p><em>Thank you for using Boson.</em></p>
+            <span class="laser-red"></span>
+        </div>
+    </body>
+</html>
