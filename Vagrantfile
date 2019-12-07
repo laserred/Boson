@@ -9,14 +9,10 @@ opts = GetoptLong.new(
 
 host_name='boson'
 
-customParameter=''
-
 opts.each do |opt, arg|
   case opt
     when '--hostname'
-      if arg == ''
-        host_name=boson
-      else
+      if arg != ''
         host_name=arg
       end
   end
@@ -27,8 +23,15 @@ Vagrant.configure("2") do |config|
   
   config.vm.box = "centos/7"
   config.vm.hostname = "#{host_name}"
+
+  ##############
+  ### Swap the comment on the below lines to avoid being
+  ### asked what network adapter to bind to on boot. Don't
+  ### forget to change [adapter] to your adapter name.
+  ##############
   config.vm.network "public_network"
-  #config.vm.network "forwarded_port", guest: 22, host: 2222, host_ip: "127.0.0.1", id: 'ssh'
+  #config.vm.network "public_network", bridge: "[adapter]"
+
   config.vm.post_up_message = <<-MESSAGE 
 
    __   __  _______  __   __  __  
@@ -46,16 +49,18 @@ Vagrant.configure("2") do |config|
   MESSAGE
 
   config.vm.synced_folder "www", "/var/www",
-	:owner => 'vagrant',
-        :group => 'www-data',
-        :mount_options => ['dmode=775', 'fmode=775']
+    :owner => 'vagrant',
+    :group => 'vagrant',
+    :mount_options => ['dmode=775', 'fmode=775']
 
-  config.vm.provision "shell", inline: "sudo service nginx restart", run: "always"
-  config.vm.provision "shell", path: "scripts/init.sh"
-  config.vm.provision "shell", path: "scripts/site.sh", env: {"HOST_NAME" => "#{host_name}"}
+  config.vm.provision "file", source: "templates/phpmyadmin.conf", destination: "/tmp/", run: "once"
+  config.vm.provision "shell", path: "scripts/init.sh", env: {"HOST_NAME" => "#{host_name}"}
+  config.vm.provision "file", source: "templates/site-nginx.conf", destination: "/tmp/", run: "once"
+  config.vm.provision "file", source: "templates/site-phpfpm.conf", destination: "/tmp/", run: "once"
+  #config.vm.provision "shell", path: "scripts/site.sh", env: {"HOST_NAME" => "#{host_name}"}
 
   config.vm.provider "virtualbox" do |vb|
-    vb.name = "Higgs - #{host_name}"
+    vb.name = "Boson - #{host_name}"
     vb.memory = "2048"
     vb.customize ['modifyvm', :id, '--uartmode1', 'disconnected']
     vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']

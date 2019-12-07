@@ -2,10 +2,11 @@
 # Laser Red Boson
 Easily setup Magento 2 sites to develop locally
 
-### Initial Install
+### Initial Setup
 
 1. Clone this repo
-2. `vagrant --hostname=[hostname] up` (this will default to boson)
+2. Install guest additions for VirtualBox `vagrant plugin install vagrant-vbguest`
+3. Start the VM `vagrant --hostname=[hostname] up` (this will default to boson)
 
 ### Setup a new site
 
@@ -21,5 +22,7 @@ Easily setup Magento 2 sites to develop locally
 Local file webroot will be at www/[hostname].local
 
 Site will be served from http://[hostname].local
+
+phpMyAdmin is available from port 8080 (http://[hostname].local:8080)
 
 **Built with love by the team at [Laser Red](https://laser.red)**
