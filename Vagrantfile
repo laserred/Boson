@@ -48,16 +48,39 @@ Vagrant.configure("2") do |config|
 
   MESSAGE
 
-  config.vm.synced_folder "www", "/var/www",
+  config.vm.synced_folder "www", "/var/www/vhosts",
     :owner => 'vagrant',
     :group => 'vagrant',
     :mount_options => ['dmode=775', 'fmode=775']
 
-  config.vm.provision "file", source: "templates/phpmyadmin.conf", destination: "/tmp/", run: "once"
-  config.vm.provision "shell", path: "scripts/init.sh", env: {"HOST_NAME" => "#{host_name}"}
-  config.vm.provision "file", source: "templates/site-nginx.conf", destination: "/tmp/", run: "once"
-  config.vm.provision "file", source: "templates/site-phpfpm.conf", destination: "/tmp/", run: "once"
-  #config.vm.provision "shell", path: "scripts/site.sh", env: {"HOST_NAME" => "#{host_name}"}
+  config.vm.provision "file",
+    source: "templates/",
+    destination: "/tmp/",
+    run: "once"
+
+  if Dir.empty?("#{File.expand_path(File.dirname(__FILE__))}/.vagrant/machines/default/virtualbox/") || ARGV[1] == '--provision' || ARGV[0] == 'provision'
+    print "Please enter your Magento authentication keys.\n"
+    print "Learn more here: https://devdocs.magento.com/guides/v2.3/install-gde/prereq/connect-auth.html\n"
+    print "Public Key: "
+    username = STDIN.gets.chomp
+    print "Private Key: "
+    password = STDIN.noecho(&:gets).chomp
+    print "\n"
+
+    config.vm.provision "shell",
+      path: "scripts/init.sh",
+      env: {
+        "HOST_NAME" => "#{host_name}",
+        "MAGE_USER" => username,
+        "MAGE_PASS" => password,
+      },
+      run: "once"
+  end
+
+  config.vm.provision "shell",
+    path: "scripts/site.sh",
+    env: {"HOST_NAME" => "#{host_name}"},
+    run: "always"
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = "Boson - #{host_name}"

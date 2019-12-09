@@ -8,18 +8,15 @@ Easily setup Magento 2 sites to develop locally
 2. Install guest additions for VirtualBox `vagrant plugin install vagrant-vbguest`
 3. Start the VM `vagrant --hostname=[hostname] up` (this will default to boson)
 
-### Setup a new site
+### Usage
 
 1. Start the VM `vagrant --hostname=[hostname] up`
-2. SSH into the VM `vagrant ssh`
-3. Navigate to your sites webroot `cd /var/www/[hostname].local/htdocs/`
-4. Install Magento `composer install`
-   1. For your first site it may ask for your Magento API auth details, follow the prompted URL to get these.
-5. Start development!
+2. Copy or clone your git repo into your sites local directory, if you're working on an exising project
+3. Import your DB using phpMyAdmin (remember to replace your site URL's)
 
 ### Info
 
-Local file webroot will be at www/[hostname].local
+Local file webroot will be at www/[hostname]
 
 Site will be served from http://[hostname].local
 
