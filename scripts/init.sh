@@ -1,7 +1,20 @@
 #!/bin/bash
 if [[ -f /home/vagrant/.provisioned ]] ; then
-    echo "## System already setup ##"
-    exit
+  # Configure Magento
+  if [[ ! -z "$MAGE_USER" ]] ; then
+    echo "
+    {
+        \"http-basic\": {
+            \"repo.magento.com\": {
+                \"username\": \"$MAGE_USER\",
+                \"password\": \"$MAGE_PASS\"
+            }
+        }
+    }" > /home/vagrant/.config/composer/auth.json
+  fi
+
+  echo "## System already setup ##"
+  exit
 fi
 echo "## Starting Setup ##"
 
@@ -67,7 +80,6 @@ yum-config-manager --enable remi-php73 &> /dev/null
 yum -y install php php-common php-cli php-fpm php-mysqlnd php-zip php-devel php-gd php-mcrypt php-mbstring php-xml php-pear php-bcmath php-json php-gd php-intl php-simplexml php-soap &> /dev/null
 
 # php.ini
-sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php.ini
 sed -i "s/zlib.output_compression = Off/\zlib.output_compression = On/g" /etc/php.ini
 sed -i "s/max_execution_time = 30/\max_execution_time = 1800/g" /etc/php.ini
 sed -i "s/memory_limit = 128M/\memory_limit = 2G/g" /etc/php.ini
@@ -91,14 +103,16 @@ systemctl enable php-fpm.service &> /dev/null
 systemctl start php-fpm
 systemctl restart nginx
 
-echo "Installing phpMyAdmin..."
+# Install phpMyAdmin
 if [[ ! -d /var/www/vhosts/phpmyadmin/ ]] ; then
+  echo "Installing phpMyAdmin..."
   mkdir /var/www/vhosts/phpmyadmin/
   wget -qO /var/www/vhosts/phpmyadmin/phpmyadmin.zip https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip
   unzip /var/www/vhosts/phpmyadmin/phpmyadmin.zip -d /var/www/vhosts/phpmyadmin/ &> /dev/null
   rm -f /var/www/vhosts/phpmyadmin/phpmyadmin.zip
   mv /var/www/vhosts/phpmyadmin/phpMyAdmin* /var/www/vhosts/phpmyadmin/htdocs/
-
+fi
+if [[ ! -f /etc/nginx/conf.d/phpmyadmin.conf ]] ; then
   echo "Configuring phpMyAdmin..."
   cp /var/www/vhosts/phpmyadmin/htdocs/config.sample.inc.php /var/www/vhosts/phpmyadmin/htdocs/config.inc.php
   sed -i "s/\['AllowNoPassword'\] = false;/\['AllowNoPassword'\] = true;/g" /var/www/vhosts/phpmyadmin/htdocs/config.inc.php
@@ -118,18 +132,16 @@ echo "Install Composer..."
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/bin --filename=composer &> /dev/null
 
 # Configure Magento
-if [[ ! -f /home/vagrant/.config/composer/auth.json ]] ; then
-  mkdir -p /home/vagrant/.config/composer
-  echo "
-  {
-      \"http-basic\": {
-          \"repo.magento.com\": {
-              \"username\": \"$MAGE_USER\",
-              \"password\": \"$MAGE_PASS\"
-          }
-      }
-  }" >> /home/vagrant/.config/composer/auth.json
-fi
+mkdir -p /home/vagrant/.config/composer
+echo "
+{
+    \"http-basic\": {
+        \"repo.magento.com\": {
+            \"username\": \"$MAGE_USER\",
+            \"password\": \"$MAGE_PASS\"
+        }
+    }
+}" > /home/vagrant/.config/composer/auth.json
 
 touch /home/vagrant/.provisioned
 
