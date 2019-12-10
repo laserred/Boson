@@ -1,2 +1,3 @@
 .vagrant
 www/*
+!www/README.md
