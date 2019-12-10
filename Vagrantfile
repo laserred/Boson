@@ -57,7 +57,7 @@ Vagrant.configure("2") do |config|
     destination: "/tmp/",
     run: "once"
 
-  if Dir.empty?("#{File.expand_path(File.dirname(__FILE__))}/.vagrant/machines/default/virtualbox/") || ARGV[1] == '--provision' || ARGV[0] == 'provision'
+  if Dir.empty?("#{File.expand_path(File.dirname(__FILE__))}/.vagrant") || ARGV[1] == '--provision' || ARGV[0] == 'provision'
     print "Please enter your Magento authentication keys. (Press ENTER to leave unchanged)\n"
     print "Learn more here: https://devdocs.magento.com/guides/v2.3/install-gde/prereq/connect-auth.html\n"
     print "Public Key: "
