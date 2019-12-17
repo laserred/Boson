@@ -67,12 +67,20 @@ Vagrant.configure("2") do |config|
     password = STDIN.noecho(&:gets).chomp
     print "\n"
 
+    # Needs validation
+    print "Please enter your required PHP version. No special characters, e.g. PHP 7.2 is just '72'.\n"
+    print "This will be the same for all sites. If you need to change it you will need to provision the box (WARNING: that will destroy all data).\n"
+    print "PHP Version: "
+    phpver = STDIN.gets.chomp
+    print "\n"
+
     config.vm.provision "shell",
       path: "scripts/init.sh",
       env: {
         "HOST_NAME" => "#{host_name}",
         "MAGE_USER" => username,
         "MAGE_PASS" => password,
+        "PHP_VER"   => phpver
       },
       run: "once"
   end

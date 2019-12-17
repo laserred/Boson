@@ -71,12 +71,12 @@ mysql --user=root <<_EOF_
 _EOF_
 echo "### DB login: root / laserred"
 
-# Install PHP 7.3
-echo "Installing PHP 7.3 and modules..."
+# Install PHP
+echo "Installing PHP $PHP_VER and modules..."
 yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm &> /dev/null
 yum -y install epel-release yum-utils &> /dev/null
 yum-config-manager --disable remi-php54 &> /dev/null
-yum-config-manager --enable remi-php73 &> /dev/null
+yum-config-manager --enable remi-php$PHP_VER &> /dev/null
 yum -y install php php-common php-cli php-fpm php-mysqlnd php-zip php-devel php-gd php-mcrypt php-mbstring php-xml php-pear php-bcmath php-json php-gd php-intl php-simplexml php-soap &> /dev/null
 
 # php.ini
