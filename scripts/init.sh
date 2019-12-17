@@ -143,6 +143,9 @@ echo "
     }
 }" > /home/vagrant/.config/composer/auth.json
 
+# Install Magento Cloud CLI
+curl -sS https://accounts.magento.cloud/cli/installer | php
+
 touch /home/vagrant/.provisioned
 
 echo "## Setup Complete ##"
