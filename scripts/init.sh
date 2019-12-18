@@ -83,7 +83,7 @@ yum -y install php php-common php-cli php-fpm php-mysqlnd php-zip php-devel php-
 sed -i "s/zlib.output_compression = Off/\zlib.output_compression = On/g" /etc/php.ini
 sed -i "s/max_execution_time = 30/\max_execution_time = 1800/g" /etc/php.ini
 sed -i "s/memory_limit = 128M/\memory_limit = 2G/g" /etc/php.ini
-sed -i 's/;session.save_path = \"\/tmp\"/session.save_path = \"\/var\/lib\/php\/sessions\/\"/g' /etc/php.ini
+sed -i 's/;session.save_path = \"\/tmp\"/session.save_path = \"\/var\/lib\/php\/session\/\"/g' /etc/php.ini
 
 # www.conf
 sed -i 's/user = apache/user = nginx/g' /etc/php-fpm.d/www.conf
