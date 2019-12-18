@@ -98,7 +98,8 @@ sed -i 's/;env\[TMP\] = \/tmp/\env\[TMP\] =\/tmp/g' /etc/php-fpm.d/www.conf
 sed -i 's/;env\[TMPDIR\] = \/tmp/\env\[TMPDIR\] = \/tmp/g' /etc/php-fpm.d/www.conf
 sed -i 's/;env\[TEMP\] = \/tmp/\env\[TEMP\] = \/tmp/g' /etc/php-fpm.d/www.conf
 
-chown -R nginx:nginx /var/lib/php/session
+chown -R vagrant:vagrant /var/lib/php/session
+chmod -R 770 /var/lib/php/session
 systemctl enable php-fpm.service &> /dev/null
 systemctl start php-fpm
 systemctl restart nginx
