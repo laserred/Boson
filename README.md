@@ -2,6 +2,12 @@
 # Laser Red Boson
 Easily setup Magento 2 sites to develop locally
 
+### Required Software
+1. VirtualBox
+2. Vagrant
+
+*WINDOWS USERS:* https://superuser.com/questions/124679/how-do-i-create-a-link-in-windows-7-home-premium-as-a-regular-user?answertab=votes#125981
+
 ### Initial Setup
 
 1. Clone this repo

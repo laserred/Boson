@@ -9,8 +9,12 @@ if [[ -f /home/vagrant/.provisioned ]] ; then
                 \"username\": \"$MAGE_USER\",
                 \"password\": \"$MAGE_PASS\"
             }
+        },
+        \"github-oauth\": {
+            \"github.com\": \"$OAUTH\"
         }
     }" > /home/vagrant/.config/composer/auth.json
+    chown -R vagrant:vagrant /home/vagrant/.config
   fi
 
   echo "## System already setup ##"
@@ -141,8 +145,12 @@ echo "
             \"username\": \"$MAGE_USER\",
             \"password\": \"$MAGE_PASS\"
         }
+    },
+    \"github-oauth\": {
+        \"github.com\": \"$OAUTH\"
     }
 }" > /home/vagrant/.config/composer/auth.json
+chown -R vagrant:vagrant /home/vagrant/.config
 
 # Install Magento Cloud CLI
 curl -sS https://accounts.magento.cloud/cli/installer | php &> /dev/null

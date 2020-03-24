@@ -31,6 +31,7 @@ echo "Downloading Magento..."
 su - vagrant -c "composer create-project --repository=https://repo.magento.com/ magento/project-community-edition /tmp/$HOST_NAME" &> /dev/null
 # Download to a temp directory and then move as Virtualbox shares are
 # too slow and causes composer to fail
+echo "Copying files to webroot..."
 mv /tmp/$HOST_NAME $TMP_ROOT
 
 echo "Fix permissions..."

@@ -63,8 +63,14 @@ Vagrant.configure("2") do |config|
     print "Learn more here: https://devdocs.magento.com/guides/v2.3/install-gde/prereq/connect-auth.html\n"
     print "Public Key: "
     username = STDIN.gets.chomp
-    print "Private Key: "
+    print "Private Key (hidden): "
     password = STDIN.noecho(&:gets).chomp
+    print "\n"
+
+    print "Please enter your GitHub OAuth access token.\n"
+    print "Create one using this link: https://github.com/settings/tokens/new?scopes=repo&description=Composer+on+Boson.\n"
+    print "Token (hidden): "
+    oauth = STDIN.noecho(&:gets).chomp
     print "\n"
 
     # Needs validation
@@ -80,7 +86,8 @@ Vagrant.configure("2") do |config|
         "HOST_NAME" => "#{host_name}",
         "MAGE_USER" => username,
         "MAGE_PASS" => password,
-        "PHP_VER"   => phpver
+        "PHP_VER"   => phpver,
+        "OAUTH"     => oauth
       },
       run: "once"
   end
