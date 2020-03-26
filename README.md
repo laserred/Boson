@@ -12,11 +12,11 @@ Easily setup Magento 2 sites to develop locally
 
 1. Clone this repo
 2. Install guest additions for VirtualBox `vagrant plugin install vagrant-vbguest`
-3. Start the VM `vagrant --hostname=[hostname] up` (this will default to boson)
+3. Start the VM `vagrant --host=[hostname] up` (this will default to boson)
 
 ### Usage
 
-1. Start the VM `vagrant --hostname=[hostname] up`
+1. Start the VM `vagrant --host=[hostname] up`
 2. Copy or clone your git repo into your sites local directory, if you're working on an exising project
 3. Import your DB using phpMyAdmin (remember to replace your site URL's)
 
